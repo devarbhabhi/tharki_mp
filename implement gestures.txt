@@ -1,0 +1,69 @@
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const title = 'Gestures';
+
+    return const MaterialApp(
+      title: title,
+      home: MyHomePage(title: title),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  final String title;
+
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Gestures'),
+        backgroundColor: Colors.purple,
+      ),
+      body: const Center(child: MyButton()),
+    );
+  }
+}
+
+class MyButton extends StatelessWidget {
+  const MyButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // The GestureDetector wraps the button.
+    return GestureDetector(
+      // show snackbar on tap of child
+      onTap: () {
+        final snackBar = SnackBar(
+            content: const Text('Hurrey you just Tapped on the Button!'));
+        // Find the ScaffoldMessenger in the widget tree
+        // and use it to show a SnackBar.
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      },
+
+      onDoubleTap: () {
+        final snackBar = SnackBar(
+            content:
+                const Text('Hurrey you just Double Tapped on the Button!'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      },
+
+      // The tap button
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: Colors.lightGreen,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: const Text('Tap Button'),
+      ),
+    );
+  }
+}
+

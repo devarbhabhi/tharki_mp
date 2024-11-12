@@ -1,0 +1,17 @@
+void main() {
+  print("Use of if statement");
+
+  int marks = 55;
+
+  if (marks >= 75) {
+    print("Distinction");
+  } else if (marks >= 60) {
+    print("First");
+  } else if (marks >= 50) {
+    print("Second");
+  } else if (marks >= 40) {
+    print("Pass");
+  } else {
+    print("Fail");
+  }
+}

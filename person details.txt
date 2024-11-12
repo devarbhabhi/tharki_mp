@@ -1,0 +1,20 @@
+class Person {
+  var name;
+  var age;
+  var loc;
+
+  void display() {
+    print("Person Details");
+    print("Name=$name");
+    print("Age=$age");
+    print("Location=$loc");
+  }
+}
+
+void main() {
+  var p = new Person();
+  p.name = "Anuja";
+  p.age = 36;
+  p.loc = "Virar";
+  p.display();
+}

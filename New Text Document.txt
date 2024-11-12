@@ -1,0 +1,194 @@
+import 'dart:html';
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: HomeScreen(),
+  ));
+}
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController name = TextEditingController();
+  TextEditingController loc = TextEditingController();
+  TextEditingController qual = TextEditingController();
+  String genderValue = "";
+  bool hobby1 = false;
+  bool hobby2 = false;
+  bool hobby3 = false;
+  String strhobby1 = "";
+  String strhobby2 = "";
+  String strhobby3 = "";
+  final formKey = GlobalKey<FormState>(); // formValidation
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("User Info"),
+      ),
+      body: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              controller: name,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please Enter Your Name';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  labelText: "Enter Your Name",
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(15)) //OutlineInputBorder
+                  ), //InputDecoration
+            ), // TextFormField
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              controller: loc,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please Enter your Location';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  labelText: "Enter your Location",
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(15)) //OutLineInputBorder
+                  ), //InputDecoration
+            ), //TextFormField
+
+            TextFormField(
+              controller: qual,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please Enter your Highest Qualification';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  labelText: "Enter your Qualifiaction",
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(15)) //OutLineInputBorder
+                  ), //InputDecoration
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+            RadioListTile(
+              value: 'Male',
+              groupValue: genderValue,
+              onChanged: (val) {
+                setState(() {
+                  genderValue = val.toString();
+                });
+              },
+              title: Text("Male"),
+            ), // RadioListTitle
+            RadioListTile(
+              value: 'Female',
+              groupValue: genderValue,
+              onChanged: (val) {
+                setState(() {
+                  genderValue = val.toString();
+                });
+              },
+              title: Text("Female"),
+            ), // RadioListTitle
+            CheckboxListTile(
+              value: hobby1,
+              onChanged: (value) {
+                setState(() {
+                  hobby1 = !hobby1;
+                  if (hobby1) {
+                    strhobby1 = 'Playing';
+                  }
+                });
+              },
+              title: Text("Playing"),
+            ), //checkboxListTile
+            CheckboxListTile(
+              value: hobby2,
+              onChanged: (value) {
+                setState(() {
+                  hobby2 = !hobby2;
+                  if (hobby2) {
+                    strhobby2 = 'Singing';
+                  }
+                });
+              },
+              title: Text("Singing"),
+            ), //checkboxListTile
+            CheckboxListTile(
+              value: hobby3,
+              onChanged: (value) {
+                setState(() {
+                  hobby3 = !hobby3;
+                  if (hobby3) {
+                    strhobby3 = 'Drawing';
+                  }
+                });
+              },
+              title: Text("Drawing"),
+            ), //checkboxListTile
+            ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    if (genderValue != "") {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NextScreen(
+                                  name: name.text,
+                                  loc: loc.text,
+                                  qual: qual.text,
+                                  gender: genderValue,
+                                  hobbies:
+                                      '${strhobby1},${strhobby2},${strhobby3}'))); // NextScreen //MaterialPageRoute
+                    }
+                  }
+                },
+                child: Text("Contiue")) // ElevatedButton
+          ],
+        ), //Column
+      ), //Form
+    ); //Scaffold
+  }
+}
+
+class NextScreen extends StatelessWidget {
+  String? name, loc, qual, gender, hobbies;
+  NextScreen({this.name, this.loc, this.qual, this.gender, this.hobbies});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Text("***************PERSON DETAILS****************"),
+          Text("Name: " + name.toString()),
+          Text("Location: " + loc.toString()),
+          Text("Qualification: " + qual.toString()),
+          Text("Gender: " + gender.toString()),
+          Text("Hobbies: " + hobbies.toString()),
+        ],
+      ), // Column
+    ); //Scaffold
+  }
+}

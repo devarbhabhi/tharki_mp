@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: ButtonBounce(),
+  )); // MaterialApp
+}
+
+class ButtonBounce extends StatefulWidget {
+  @override
+  createState() => ButtonBounceState();
+}
+
+class ButtonBounceState extends State<ButtonBounce> {
+  double leftPosition = 20;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        AnimatedPositioned(
+          left: leftPosition,
+          top: 100,
+          duration: Duration(seconds: 5),
+          child: Container(
+            height: 60,
+            width: 200,
+            color: Colors.teal,
+          ),
+        ),
+        AnimatedPositioned(
+            left: leftPosition,
+            top: 200,
+            curve: Curves.bounceOut,
+            duration: Duration(seconds: 5),
+            child: Container(
+              height: 60,
+              width: 200,
+              color: Colors.orange,
+            )),
+        Positioned(
+          left: 220,
+          top: 300,
+          child: ElevatedButton(
+            child: Text('Show Animation'),
+            onPressed: () {
+              setState(() => leftPosition = leftPosition <= 20 ? 400.0 : 20.0);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}

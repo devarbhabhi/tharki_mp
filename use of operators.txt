@@ -1,0 +1,25 @@
+void main() {
+  print("Use of Operators");
+  
+  int x = 12, y = 5;
+  var ans = x + y;
+  print("Addition=$ans");
+  
+  ans = x - y;
+  print("Subtraction=$ans");
+  
+  ans = x * y;
+  print("Multiplication=$ans");
+  
+  var ans1 = x / y;
+  print("Division=$ans1");
+  
+  var ans2 = x ~/ y;
+  print("Division=$ans2");
+  
+  ans = x % y;
+  print("Reminder=$ans");
+  
+  ans = -x;
+  print("Negotiation=$ans");
+}
